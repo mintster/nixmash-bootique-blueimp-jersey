@@ -1,0 +1,47 @@
+
+<!--suppress HtmlUnknownTarget -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="/img/favicon.ico"/>
+
+{{^pageTitle}}
+<title>{{ pageinfo.page_title }}</title>
+{{/pageTitle}}
+{{#pageTitle}}
+<title>{{ pageTitle }}</title>
+{{/pageTitle}}
+
+{{^user}}
+    {{#pageinfo.inProductionMode}}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-X"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-XXXXXXX-X');
+</script>
+
+    {{/pageinfo.inProductionMode}}
+{{/user}}
+
+<meta name="nixmash:pageid" content="{{ pageinfo.page_id }}"/>
+<meta name="nixmash:pagekey" content="{{ pageinfo.page_key }}"/>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap.cosmo.css" rel="stylesheet">
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="/css/application.css" rel="stylesheet">
+<link href="/css/github.css" rel="stylesheet">
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-filestyle.js"></script>
+
+<script src="/js/handlebars-v3.0.3.js"></script>
+<script src="/js/handlebars-handler.js"></script>

@@ -1,0 +1,20 @@
+<div id="userinfo">
+    <div class="container">
+        <div class="userinfo">
+            <h3>Current User Info</h3>
+            <p class="userinfoLine">____________________</p>
+                <div class="userdetails">
+            {{#user}}
+                    <p><span>User:</span> {{displayName}}</p>
+                    <p><span>Username:</span>{{username}}</p>
+                    <p><span>Email:</span>{{email}}</p>
+                    <p><span>Permissions:</span>{{permissionList}}</p>
+                    <p><span>Roles:</span>{{roleList}}</p>
+            {{/user}}
+                    {{^user}}
+                    <p>Anonymous User -- not logged in</p>
+                    {{/user}}
+                </div>
+        </div>
+    </div>
+</div>

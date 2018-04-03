@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            <div class="body">
+                <h3>File Upload Demos</h3>
+                <ol class="menu">
+                    <li><a href="/uploads/single">Upload a Single File</a></li>
+                    <li><a href="/uploads/multi">Multiple File Uploads</a></li>
+                    <li><a href="/uploads/blueimp">BlueImp jQuery Plugin Upload Demo</a></li>
+                </ol>
+                <h3>File Download Demos</h3>
+                <ol class="menu">
+                    <li><a href="/downloads">Public and Secure Downloads</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{{> templates/partials/userinfo.html }}
+
+{{> templates/partials/footer.html }}
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            {{#msg}}
+                <div id="alert-message" class="alert alert-success fade in">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    <p>You can now download all <strong><em>{{msg}}</em></strong> accessible files.
+                </div>
+            {{/msg}}
+            <div class="body">
+                <h3>Public Downloads</h3>
+                <ol class="menu">
+                    <li><a href="/downloads/public/txt">Text File</a></li>
+                    <li><a href="/downloads/public/odt">LibreOffice Writer File</a></li>
+                    <li><a href="/downloads/public/pdf">PDF File</a></li>
+                    <li><a href="/downloads/public/jpg">Jpeg Image</a></li>
+                    <li><a href="/downloads/public/tar.gz">Tar Gzipped File</a></li>
+                </ol>
+                <h3>Secure Downloads</h3>
+                <ol class="menu">
+                    <li><a href="/downloads/users">Gus User Jpeg Image - Requires User Role <em>(username: ken / password: halo)</em></a></li>
+                    <li><a href="/downloads/admin">Gus Admin Jpeg Image - Requires Admin Role <em>(username: bob / password: password)</em></a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{{> templates/partials/userinfo.html }}
+
+{{> templates/partials/footer.html }}
+
+{{#msg}}
+{{/msg}}
+</body>
+</html>

@@ -1,0 +1,137 @@
+/*<editor-fold desc="Page ---------------------------------/">*/
+body {
+    background-color: #eee;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="Body ------------------------------/">*/
+#content {
+    background-color: #fff;
+    margin: 50px 0 0 0;
+    min-height: 500px;
+}
+.content {
+}
+.content h1.title {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+p.subtitle {
+    font-size: 18px;
+}
+.body {
+    margin-top: 0;
+}
+ol.menu {
+    margin: 20px auto 40px auto;
+    font-size: 18px;
+    padding-left: 80px;
+}
+ol.menu li {
+    margin-bottom: 3px;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="Login Form ----------------------------/">*/
+h2.login-title {
+    margin-bottom: 20px;
+}
+.row-centered {
+    text-align: center;
+}
+.col-centered {
+    display: inline-block;
+    float: none;
+    text-align: left;
+    /* inline-block space fix */
+    margin-right: -4px;
+}
+.content.login-form {
+    min-height: 620px;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="UserInfo -----------------------------------/">*/
+#userinfo {
+    background-color: #ffffff;
+    margin: 0;
+    padding-bottom: 40px;
+    max-width: 100%;
+    display: block;
+    font-size: 80%;
+}
+#userinfo h3 {
+    font-size: 24px;
+    margin-bottom: 0;
+}
+.userinfo p.userinfoLine {
+    color: #aaaaaa;
+    margin-bottom: 12px;
+}
+#userinfo p span {
+    font-weight: bold;
+    margin-right: 3px;
+}
+.userinfo p {
+    padding-bottom: 0;
+    margin-bottom: 1px;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="Page Header -----------------/">*/
+.page-header {
+    border-bottom: none;
+}
+.page-header h1 {
+    font-size: 3em;
+}
+.sponsor img {
+    max-width: 175px;
+}
+.sponsor {
+    text-align: right;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="Navbar -------------------------/">*/
+a.navbar-text.pull-right.navbar-demos.dropdown-toggle,
+a.navbar-text.pull-right.navbar-welcome.dropdown-toggle {
+    margin: 0;
+}
+img.navbar-profilepic {
+    margin-top: 9px;
+    border: #ddd 1px solid;
+}
+input.btn-navbar {
+    margin-top: 6px;
+}
+/*</editor-fold>*/
+/*<editor-fold desc="File Uploads -------------------------------/ ">*/
+input.file-input {
+    padding: 12px 0;
+}
+.button-row {
+    display: inline-block;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+form.multifile input.file-input {
+    float: left;
+}
+form.multifile button.btn-sm {
+    padding: 1px 6px;
+    font-size: 12px;
+    margin-top: 11px;
+    border-radius: 50%;
+}
+.col-cancel {
+    padding-left: 0;
+}
+    /*</editor-fold>*/
+/*<editor-fold desc="Footer ------------------------------/">*/
+#footer {
+    margin: 0;
+    min-height: 80px
+}
+
+.footer {
+    font-size: 16px;
+    color: #666;
+    margin: 40px auto;
+}
+/*</editor-fold>*/

@@ -1,0 +1,9 @@
+<div class="form-group" id='form-group-{{fieldName}}'>
+    <label for="{{fieldName}}" class="col-lg-3 control-label">Select File</label>
+    <div class="col-lg-5">
+        <input type="file" name="file" id="{{fieldName}}"  class="filestyle" data-btnClass="btn-success" />
+    </div>
+    <div class="col-lg-1 col-cancel">
+        <button class="btn btn-warning"  type="button" onclick="removeFileRow('{{fieldName}}'); return false;">Cancel</button>
+    </div>
+</div>

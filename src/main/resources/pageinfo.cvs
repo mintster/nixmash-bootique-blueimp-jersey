@@ -1,0 +1,14 @@
+PAGE_ID,PAGE_KEY,PAGE_TITLE,HEADING,SUBHEADING,NAVBAR_MENU,SIDEBAR_MENU
+1,home,Home Page,Welcome!,File Upload and Download Demos in Jersey,*,*
+2,error,Error Page,Oops!,*,*,*
+3,single,Single File Uploads,Single File Uploads,Select a file to be uploaded in the form below,uploads,*
+4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,uploads,*
+5,blueimp,BlueImp jQuery File Upload,BlueImp jQuery File Upload Demo,Enter files to be uploaded below,uploads,*
+6,downloads,File Downloads,File Downloads,Click on file links to download,downloads,*
+15,login,Login,Please Login,*,*,*
+16,admin,Administration,*,*,admin,admin
+17,unauthorized,Unauthorized,Unauthorized,*,downloads,*
+
+
+
+

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.bootique.parent</groupId>
+        <artifactId>bootique-parent</artifactId>
+        <version>0.12</version>
+    </parent>
+
+    <groupId>com.nixmash</groupId>
+    <artifactId>bootique-fileupload</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <bootique.bom.version>0.25</bootique.bom.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit4.version>4.12</junit4.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <assertj.version>3.8.0</assertj.version>
+        <mvn.build.java.version>1.8</mvn.build.java.version>
+        <mvn.version>3.0.0</mvn.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <mysql.version>5.1.34</mysql.version>
+        <mockito.version>2.8.47</mockito.version>
+        <commons-io.version>2.5</commons-io.version>
+        <mustache.version>0.9.5</mustache.version>
+        <ibatis.version>3.0</ibatis.version>
+        <multipart.version>2.24</multipart.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <h2.version>1.4.196</h2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.bootique.bom</groupId>
+                <artifactId>bootique-bom</artifactId>
+                <version>${bootique.bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- Bootique Modules -->
+        <dependency>
+            <groupId>io.bootique.mvc</groupId>
+            <artifactId>bootique-mvc-mustache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jersey</groupId>
+            <artifactId>bootique-jersey-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.logback</groupId>
+            <artifactId>bootique-logback</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.shiro</groupId>
+            <artifactId>bootique-shiro-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jdbc</groupId>
+            <artifactId>bootique-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jdbc</groupId>
+            <artifactId>bootique-jdbc-tomcat</artifactId>
+        </dependency>
+
+        <!-- Other Dependencies-->
+        <dependency>
+            <groupId>com.liferay.org.apache.commons.fileupload</groupId>
+            <artifactId>com.liferay.org.apache.commons.fileupload</artifactId>
+            <version>6.2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${multipart.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b10</version>
+        </dependency>
+        <!--                    <dependency>
+                 <groupId>org.glassfish.jersey.ext</groupId>
+                 <artifactId>jersey-declarative-linking</artifactId>
+                 <version>${jersey-links.version}</version>
+             </dependency>
+             -->
+
+        <!-- Test Dependencies-->
+        <dependency>
+            <groupId>io.bootique</groupId>
+            <artifactId>bootique-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jetty</groupId>
+            <artifactId>bootique-jetty-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jdbc</groupId>
+            <artifactId>bootique-jdbc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-core</artifactId>
+            <version>${ibatis.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit4.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,46 @@
+
+jetty:
+  staticResourceBase: classpath:static/
+  connectors:
+  -
+    port: 9001
+
+mvc:
+  templateBase: "classpath:"
+
+log:
+  level: info
+  loggers:
+    org.apache.shiro:
+      level: 'off'
+    org.apache.jetty:
+      level: 'off'
+    io.bootique.jetty:
+      level: 'off'
+    io.bootique.jersey:
+      level: 'off'
+
+jdbc:
+  MySQL:
+    url:  jdbc:mysql://localhost:3306/uploaderdb
+    driverClassName: com.mysql.jdbc.Driver
+    username: devuser
+    password: password
+    validationQuery: "SELECT 1"
+    testOnBorrow: true
+    testWhileIdle: true
+
+shiroweb:
+  urls:
+    "/downloads/users"   : authc
+    "/downloads/admin"   : roles[admin]
+    "/login" : anon
+    "/" : anon
+
+
+
+
+
+
+
+
