@@ -1,0 +1,39 @@
+/*<editor-fold desc="Page ---------------------------------/">*/
+body {
+    background-color: #eee;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="Body ------------------------------/">*/
+#content {
+    background-color: #fff;
+    margin: 50px 0 0 0;
+    min-height: 720px;
+}
+.content {
+    margin: 80px auto;
+}
+.content h1.title {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+p.subtitle {
+    font-size: 18px;
+}
+.body {
+    margin-top: 40px;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="Footer ------------------------------/">*/
+#footer {
+    margin: 0;
+    min-height: 80px
+}
+
+.footer {
+    font-size: 16px;
+    color: #666;
+    margin: 40px auto;
+}
+/*</editor-fold>*/
