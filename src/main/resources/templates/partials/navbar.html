@@ -13,8 +13,15 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li{{#pageinfo.activeMenu.postsMenu}} class="active" {{/pageinfo.activeMenu.postsMenu}}>
-                <a href="/files">{{#pageinfo.trans}}navbar.files{{/pageinfo.trans}}</a>
+                <li{{#pageinfo.activeMenu.demoMenu}} class="active" {{/pageinfo.activeMenu.demoMenu}}>
+                <a href="#" class="navbar-text pull-right navbar-demos dropdown-toggle"
+                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.demos{{/pageinfo.trans}}</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/uploads/single">Single File Upload</a>
+                    </li>
+                    <li><a href="/uploads/multi">Multiple File Upload</a>
+                    </li>
+                </ul>
                 </li>
                 {{#user.administrator}}
                 <li>

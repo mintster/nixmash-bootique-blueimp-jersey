@@ -28,6 +28,7 @@
         <commons-io.version>2.5</commons-io.version>
         <mustache.version>0.9.5</mustache.version>
         <ibatis.version>3.0</ibatis.version>
+        <multipart.version>2.24</multipart.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +68,11 @@
         </dependency>
 
         <!-- Other Dependencies-->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${multipart.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

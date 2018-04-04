@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            <div class="body">
+                <form action="/uploads/single" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="file" class="col-lg-3 control-label">Select File</label>
+                            <div class="col-lg-9">
+                                <input type="file" name="file" id="file" class="file-input"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3 button-row">
+                                <input type="submit" class="btn btn-primary" value="Upload"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            {{#uploaded}}
+            <div class="files">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-9 file-out">File successfully uploaded to: {{uploaded}}</div>
+            </div>
+            {{/uploaded}}
+        </div>
+    </div>
+</div>
+
+{{> templates/partials/footer.html }}
+
+</body>
+</html>

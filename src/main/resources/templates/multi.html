@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            <div class="body">
+                <form action="/uploads/multi" method="POST" class="form-horizontal multifile" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="file1" class="col-lg-3 control-label">Select File</label>
+                            <div class="col-lg-9">
+                                <input type="file" name="file" id="file1" class="file-input"/>
+                            </div>
+                        </div>
+                        <div id="newfile"></div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3 button-row">
+                                <button id="addFile" class="btn btn-success" name="addFile"
+                                        onclick="addFileRow()" type="button">Add File</button>
+                                <input type="submit" class="btn btn-primary" value="Upload"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            {{#uploaded}}
+            <div class="files">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-9 file-out">File successfully uploaded to: {{.}}</div>
+            </div>
+            {{/uploaded}}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var fileIndex = 2;
+    var baseUrl = "/rest/addfile/";
+
+    function addFileRow() {
+        $.get(baseUrl + fileIndex, function (data) {
+            $("#newfile").append(data);
+            fileIndex++;
+        });
+    }
+
+</script>
+
+{{> templates/partials/footer.html }}
+
+</body>
+</html>

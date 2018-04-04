@@ -26,8 +26,7 @@ public class WebUI implements Serializable {
 
     private static final long serialVersionUID = 9155986213118958079L;
     private static final String NULL_FIELD = "*";
-    private static final String USERS_MENU = "users";
-    private static final String POSTS_MENU = "posts";
+    private static final String DEMOS_MENU = "demos";
     private static final String POSTS_SIDE_MENU = "posts";
     private static final String TAGS_SIDE_MENU = "tags";
     private static final String SEARCH_SIDE_MENU = "search";
@@ -38,11 +37,6 @@ public class WebUI implements Serializable {
     private static final String ADMIN_SIDE_SITE_MENU = "adminSite";
     private static final String ADMIN_SIDE_UTILITIES_MENU = "adminUtilities";
     private static final String BUNDLE = "messages";
-    private static final String ERROR_PAGE = "error";
-
-    public static final String SESSION_QUICKSEARCH_QUERY = "quicksearchQuery";
-    public static final String SESSION_SEARCH_QUERY = "searchQuery";
-    private static final String POST_SOURCE_NA = "NA";
 
     // region Constructor
 
@@ -167,11 +161,8 @@ public class WebUI implements Serializable {
             return activeMenu;
         else {
             switch (menu) {
-                case USERS_MENU:
-                    activeMenu.setUsersMenu(true);
-                    break;
-                case POSTS_MENU:
-                    activeMenu.setPostsMenu(true);
+                case DEMOS_MENU:
+                    activeMenu.setDemoMenu(true);
                     break;
                 default:
                     break;

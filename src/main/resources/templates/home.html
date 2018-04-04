@@ -11,10 +11,13 @@
 <div id="content">
     <div class="container">
         <div class="content">
-            <h1 class="title">Welcome!</h1>
-            <p class="subtitle">Welcome to NixMash File Uploader</p>
+            {{> templates/partials/lead.html }}
             <div class="body">
-                <p>Enter files to upload to the server.</p>
+                <h3>Select demo option</h3>
+                <ol>
+                    <li><a href="/uploads/single">Single File Upload Demo</a></li>
+                    <li><a href="/uploads/multi">Multiple File Uploads</a></li>
+                </ol>
             </div>
         </div>
     </div>

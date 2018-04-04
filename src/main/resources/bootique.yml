@@ -8,13 +8,17 @@ jetty:
 mvc:
   templateBase: "classpath:"
 
-#log:
-#  level: debug
-#  loggers:
-#    org.apache.shiro:
-#      level: debug
-#    org.apache.jetty:
-#      level: debug
+log:
+  level: info
+  loggers:
+    org.apache.shiro:
+      level: 'off'
+    org.apache.jetty:
+      level: 'off'
+    io.bootique.jetty:
+      level: 'off'
+    io.bootique.jersey:
+      level: 'off'
 
 jdbc:
   MySQL:

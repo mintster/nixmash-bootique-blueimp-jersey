@@ -3,7 +3,6 @@ body {
     background-color: #eee;
 }
 /*</editor-fold>*/
-
 /*<editor-fold desc="Body ------------------------------/">*/
 #content {
     background-color: #fff;
@@ -11,7 +10,6 @@ body {
     min-height: 720px;
 }
 .content {
-    margin: 80px auto;
 }
 .content h1.title {
     font-size: 48px;
@@ -22,6 +20,42 @@ p.subtitle {
 }
 .body {
     margin-top: 40px;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="Page Header -----------------/">*/
+.page-header {
+    border-bottom: none;
+}
+.page-header h1 {
+    font-size: 3em;
+}
+.sponsor img {
+    max-width: 175px;
+}
+.sponsor {
+    text-align: right;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="Navbar -------------------------/">*/
+a.navbar-text.pull-right.navbar-demos.dropdown-toggle,
+a.navbar-text.pull-right.navbar-welcome.dropdown-toggle {
+    margin: 0;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="File Uploads -------------------------------/ ">*/
+input.file-input {
+    padding: 12px 0;
+}
+.button-row {
+    display: inline-block;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.form-group{
+    margin-bottom: 0;
 }
 /*</editor-fold>*/
 

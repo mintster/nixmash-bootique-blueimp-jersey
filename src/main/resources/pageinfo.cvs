@@ -1,16 +1,10 @@
 PAGE_ID,PAGE_KEY,PAGE_TITLE,HEADING,SUBHEADING,NAVBAR_MENU,SIDEBAR_MENU
-1,home,Home Page,*,*,*,*
+1,home,Home Page,Welcome!,Demos of Single&#44; Multiple File Uploads and Downloads,*,*
 2,error,Error Page,Oops!,*,*,*
-3,posts,Posts,Posts,Links&#44; Notes&#44; Bits of Code...,posts,posts
-4,login,Login,Welcome,*,*,*
-5,admin,Administration,*,*,admin,admin
-6,post,*,*,*,posts,posts
-7,tagcloud,Tag Cloud,Tag Cloud,All Tags,posts,tags
-8,tagposts,*,*,*,posts,posts
-9,admin-posts,Administration: Posts,*,*,*,adminPosts
-10,admin-newpost,Administration: New Post,*,*,*,adminNewPost
-11,admin-updatepost,Administration: Update Post,*,*,*,adminPosts
-12,quicksearch,Quick Search,Quick Search,*,posts,posts
-13,search,Search,Search Posts,Create a detailed search query,posts,search
+3,single,Single File Uploads,Single File Uploads,Select a file to be uploaded in the form below,demos,*
+4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,demos,*
+5,login,Login,Welcome,*,*,*
+6,admin,Administration,*,*,admin,admin
+
 
 

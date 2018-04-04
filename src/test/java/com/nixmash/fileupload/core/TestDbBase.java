@@ -20,7 +20,6 @@ import javax.ws.rs.client.Client;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 @RunWith(JUnit4.class)
 public class TestDbBase {
@@ -41,9 +40,11 @@ public class TestDbBase {
     @BeforeClass
     public static void setupClass() throws IOException, SQLException {
 
+        //region Bootique Runtime config
+
         runtime = testFactory.app()
                 .autoLoadModules()
-                .args("-s","--config=classpath:test.yml")
+                .args("-s", "--config=classpath:test.yml")
                 .module(b -> b.bind(WebUI.class))
                 .module(b -> b.bind(UserService.class).to(UserServiceImpl.class))
                 .module(b -> b.bind(UserDb.class).to(UserDbImpl.class))
@@ -51,6 +52,7 @@ public class TestDbBase {
                 .createRuntime();
 
         userService = runtime.getInstance(UserService.class);
+        //endregion
 
         DataSourceFactory datasource = runtime.getInstance(DataSourceFactory.class);
         WebConfig webConfig = runtime.getInstance(WebConfig.class);
@@ -58,14 +60,12 @@ public class TestDbBase {
 
         String sql = webConfig.configPath + "/populate.sql";
         if (webConfig.datasourceName.equals("MySqlTest")) {
-            try (Statement statement = connection.createStatement()) {
-                File script = new File(sql);
-                ScriptRunner sr = new ScriptRunner(connection);
-                sr.setLogWriter(null);
-                Reader reader = new BufferedReader(new FileReader(script));
-                sr.runScript(reader);
-                reader.close();
-            }
+            File script = new File(sql);
+            ScriptRunner sr = new ScriptRunner(connection);
+            sr.setLogWriter(null);
+            Reader reader = new BufferedReader(new FileReader(script));
+            sr.runScript(reader);
+            reader.close();
         }
 
     }

@@ -14,6 +14,7 @@ import io.bootique.jersey.JerseyModule;
 import io.bootique.jetty.JettyModule;
 import io.bootique.shiro.ShiroModule;
 import io.bootique.shiro.web.ShiroWebModule;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +39,8 @@ public class Launcher implements Module {
         binder.bind(UserDb.class).to(UserDbImpl.class);
 
         Package pkg = GeneralController.class.getPackage();
-        JerseyModule.extend(binder).addPackage(pkg);
+        JerseyModule.extend(binder).addPackage(pkg).addFeature(MultiPartFeature.class);
+
         JettyModule.extend(binder).addStaticServlet("s1", "/css/*", "/img/*", "/js/*", "/fonts/*");
         ShiroModule.extend(binder).addRealm(NixmashRealm.class);
         ShiroWebModule.extend(binder).setFilter("roles", NixmashRoleFilter.class);
