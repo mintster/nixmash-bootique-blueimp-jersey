@@ -62,9 +62,9 @@ public class UploadController {
     @Path("/multi")
     public String restDemo(@FormDataParam("file") List<FormDataBodyPart> files) throws IOException {
         List<String> uploaded = new ArrayList<>();
-        for (FormDataBodyPart formDataBodyPart : files) {
-            ContentDisposition headerOfFilePart =  formDataBodyPart.getContentDisposition();
-            InputStream fileInputStream = formDataBodyPart.getValueAs(InputStream.class);
+        for (FormDataBodyPart bodyPart : files) {
+            ContentDisposition headerOfFilePart =  bodyPart.getContentDisposition();
+            InputStream fileInputStream = bodyPart.getValueAs(InputStream.class);
             if (fileInputStream.read() > 0) {
                 String uploadedFileLocation = "/tmp/" + headerOfFilePart.getFileName();
                 writeToFile(fileInputStream, uploadedFileLocation);
@@ -95,14 +95,16 @@ public class UploadController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public String uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) {
+            @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
 
-        String uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
-        writeToFile(uploadedInputStream, uploadedFileLocation);
-        logger.info("File uploaded to : " + uploadedFileLocation);
-        String out = uploadedFileLocation;
         Map<String, Object> model = webUI.getBasePageInfo(SINGLE_UPLOAD_PAGE);
-        model.put("uploaded", out);
+        if (uploadedInputStream.read() > 0) {
+            String uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
+            writeToFile(uploadedInputStream, uploadedFileLocation);
+            logger.info("File uploaded to : " + uploadedFileLocation);
+            String out = uploadedFileLocation;
+            model.put("uploaded", out);
+        }
         return templatePathResolver.populateTemplate("single.html", model);
     }
 
