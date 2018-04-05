@@ -67,7 +67,7 @@ public class UploadController {
             InputStream fileInputStream = bodyPart.getValueAs(InputStream.class);
             if (fileInputStream.read() > 0) {
                 String uploadedFileLocation = "/tmp/" + headerOfFilePart.getFileName();
-                writeToFile(fileInputStream, uploadedFileLocation);
+                webUI.writeToFile(fileInputStream, uploadedFileLocation);
                 logger.info("File uploaded to : " + uploadedFileLocation);
                 uploaded.add(uploadedFileLocation);
             }
@@ -100,32 +100,13 @@ public class UploadController {
         Map<String, Object> model = webUI.getBasePageInfo(SINGLE_UPLOAD_PAGE);
         if (uploadedInputStream.read() > 0) {
             String uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
-            writeToFile(uploadedInputStream, uploadedFileLocation);
+            webUI.writeToFile(uploadedInputStream, uploadedFileLocation);
             logger.info("File uploaded to : " + uploadedFileLocation);
-            String out = uploadedFileLocation;
-            model.put("uploaded", out);
+            model.put("uploaded", uploadedFileLocation);
         }
         return templatePathResolver.populateTemplate("single.html", model);
     }
 
-    private void writeToFile(InputStream uploadedInputStream,
-                             String uploadedFileLocation) {
-
-        try {
-            OutputStream out;
-            int read;
-            byte[] bytes = new byte[1024];
-
-            out = new FileOutputStream(new File(uploadedFileLocation));
-            while ((read = uploadedInputStream.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     // endregion
 

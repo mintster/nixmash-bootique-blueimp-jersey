@@ -3,8 +3,9 @@ PAGE_ID,PAGE_KEY,PAGE_TITLE,HEADING,SUBHEADING,NAVBAR_MENU,SIDEBAR_MENU
 2,error,Error Page,Oops!,*,*,*
 3,single,Single File Uploads,Single File Uploads,Select a file to be uploaded in the form below,demos,*
 4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,demos,*
-5,login,Login,Welcome,*,*,*
-6,admin,Administration,*,*,admin,admin
+5,blueimp,BlueIimp jQuery File Upload,BlueImp jQuery File Upload Demo,Enter files to be uploaded below,demos,*
+15,login,Login,Welcome,*,*,*
+16,admin,Administration,*,*,admin,admin
 
 
 

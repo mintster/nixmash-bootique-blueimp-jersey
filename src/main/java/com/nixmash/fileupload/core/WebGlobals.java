@@ -20,6 +20,7 @@ public class WebGlobals implements java.io.Serializable {
 	public Boolean inProductionMode;
 	public String siteName;
 	public String baseUrl;
+	public String fileUploadPath;
 
 	private final WebConfig webConfig;
 
@@ -38,6 +39,7 @@ public class WebGlobals implements java.io.Serializable {
 			this.inProductionMode = Boolean.valueOf(properties.getProperty("application.inProductionMode"));
 			this.siteName = properties.getProperty("site.name");
 			this.baseUrl= properties.getProperty("base.url");
+			this.fileUploadPath = properties.getProperty("file.upload.path");
 
 		} catch (IOException ex) {
 			logger.error(ex.getMessage());

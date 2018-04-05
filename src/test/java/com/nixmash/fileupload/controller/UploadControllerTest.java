@@ -32,4 +32,5 @@ public class UploadControllerTest extends JettyTestBase {
         String html = response.readEntity(String.class);
         assertTrue(html.contains(SINGLE_PAGE_STRING));
     }
+
 }

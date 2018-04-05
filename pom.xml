@@ -29,6 +29,7 @@
         <mustache.version>0.9.5</mustache.version>
         <ibatis.version>3.0</ibatis.version>
         <multipart.version>2.24</multipart.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +52,10 @@
             <artifactId>bootique-mvc-mustache</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.bootique.jersey</groupId>
+            <artifactId>bootique-jersey-jackson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.bootique.logback</groupId>
             <artifactId>bootique-logback</artifactId>
         </dependency>
@@ -68,6 +73,11 @@
         </dependency>
 
         <!-- Other Dependencies-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
@@ -89,17 +99,17 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.el</artifactId>
             <version>3.0.1-b10</version>
         </dependency>
-                <dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-declarative-linking</artifactId>
-            <version>${jersey-links.version}</version>
-        </dependency>
-        -->
+        <!--                    <dependency>
+                 <groupId>org.glassfish.jersey.ext</groupId>
+                 <artifactId>jersey-declarative-linking</artifactId>
+                 <version>${jersey-links.version}</version>
+             </dependency>
+             -->
 
         <!-- Test Dependencies-->
         <dependency>

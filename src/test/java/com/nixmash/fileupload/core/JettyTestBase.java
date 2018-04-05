@@ -33,6 +33,7 @@ public class JettyTestBase {
     protected static final String HOME_PAGE_PATH = "/";
     protected static final String SINGLE_UPLOAD_PATH = "/uploads/single";
     protected static final String MULTI_UPLOAD_PATH = "/uploads/multi";
+    protected static final String BLUEIMP_PAGE_PATH = "/uploads/blueimp";
 
     @ClassRule
     public static BQTestFactory testFactory = new BQTestFactory();
