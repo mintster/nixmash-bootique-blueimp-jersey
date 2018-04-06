@@ -29,6 +29,20 @@ public class FileServiceImplTest extends TestDbBase {
         assertEquals(retrieved.getName(), created.getName());
     }
 
+    @Test
+    public void deletePostImage() {
+        PostImage created = fileService.addPostImage(createPostImage());
+        Long id = created.getId();
+
+        PostImage retrieved = fileService.getPostImage(id);
+        assertTrue(retrieved.getId() > 0);
+
+        fileService.deletePostImage(id);
+        PostImage deleted = fileService.getPostImage(id);
+
+        assertNull(deleted.getId());
+    }
+
     private PostImage createPostImage() {
         PostImage postImage = new PostImage();
         postImage.setPostId(-1L);

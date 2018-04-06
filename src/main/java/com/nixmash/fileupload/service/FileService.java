@@ -6,6 +6,6 @@ import com.nixmash.fileupload.dto.PostImage;
 @ImplementedBy(FileServiceImpl.class)
 public interface FileService {
     PostImage addPostImage(PostImage postImage);
-
     PostImage getPostImage(Long image_id);
+    void deletePostImage(Long image_id);
 }

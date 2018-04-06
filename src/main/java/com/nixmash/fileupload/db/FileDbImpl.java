@@ -77,6 +77,21 @@ public class FileDbImpl implements FileDb {
         return postImage;
     }
 
+    @Override
+    public void deletePostImageById(Long image_id)  throws SQLException {
+        PostImage postImage = new PostImage();
+        try (Connection cn = dataSource.forName(webConfig.datasourceName).getConnection()) {
+
+            try (Statement statement = cn.createStatement()) {
+                String sql = "DELETE FROM images WHERE image_id = " + image_id;
+                statement.execute(sql);
+                statement.close();
+                cn.close();
+            }
+        } catch (SQLException e) {
+            logger.info("Error deleting postImage: " + e.getMessage());
+        }
+    }
 
     private void populatePostImage(ResultSet rs, PostImage postImage) throws SQLException {
         postImage.setId(rs.getLong("image_id"));

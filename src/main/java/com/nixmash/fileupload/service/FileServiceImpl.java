@@ -43,4 +43,13 @@ public class FileServiceImpl implements FileService {
         }
         return null;
     }
+
+    @Override
+    public void deletePostImage(Long image_id) {
+        try {
+            fileDb.deletePostImageById(image_id);
+        } catch (SQLException e) {
+            logger.error("Exception deleting PostImage By Id: " + e.getMessage());
+        }
+    }
 }

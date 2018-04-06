@@ -9,6 +9,7 @@ import com.nixmash.fileupload.service.FileService;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.media.multipart.ContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -17,11 +18,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,9 +110,9 @@ public class BlueImpController {
                 image = fileService.addPostImage(image);
                 image.setId(image.getId());
 
-                image.setUrl("/posts/photos/picture/" + image.getId());
-                image.setThumbnailUrl("/posts/photos/thumbnail/" + image.getId());
-                image.setDeleteUrl("/posts/photos/delete/" + image.getId());
+                image.setUrl("/uploads/photos/picture/" + image.getId());
+                image.setThumbnailUrl("/uploads/photos/thumbnail/" + image.getId());
+                image.setDeleteUrl("/uploads/photos/delete/" + image.getId());
                 image.setDeleteType("DELETE");
                 logger.info(image.toString());
                 list.add(image);
@@ -120,4 +125,53 @@ public class BlueImpController {
 
 // endregion
 
+    // region Individual Photo handling
+
+    @GET
+    @Path(value = "/photos/picture/{id}")
+    public void picture(@Context HttpServletResponse response, @PathParam("id") Long id) {
+        PostImage image = fileService.getPostImage(id);
+        File imageFile = new File(webGlobals.fileUploadPath + image.getName());
+        response.setContentType(image.getContentType());
+        response.setContentLength(image.getSize().intValue());
+        try {
+            InputStream is = new FileInputStream(imageFile);
+            IOUtils.copy(is, response.getOutputStream());
+        } catch (IOException e) {
+            logger.error("Could not show picture " + id, e);
+        }
+    }
+
+    @GET
+    @Path(value = "/photos/thumbnail/{id}")
+    public void thumbnail(@Context HttpServletResponse response, @PathParam("id") Long id) {
+        PostImage image = fileService.getPostImage(id);
+        File imageFile = new File(webGlobals.thumbnailUploadPath + image.getName());
+        response.setContentType(image.getContentType());
+        response.setContentLength(image.getThumbnailSize().intValue());
+        try {
+            InputStream is = new FileInputStream(imageFile);
+            IOUtils.copy(is, response.getOutputStream());
+        } catch (IOException e) {
+            logger.error("Could not show thumbnail " + id, e);
+        }
+    }
+
+    @DELETE
+    @Path(value = "/photos/delete/{id}")
+    public List<Map<String, Object>> deletePhoto(@PathParam("id") Long id) {
+        PostImage image = fileService.getPostImage(id);
+        File imageFile = new File(webGlobals.fileUploadPath + image.getName());
+        imageFile.delete();
+        File thumbnailFile = new File(webGlobals.thumbnailUploadPath + image.getName());
+        thumbnailFile.delete();
+        fileService.deletePostImage(id);
+        List<Map<String, Object>> results = new ArrayList<>();
+        Map<String, Object> success = new HashMap<>();
+        success.put("success", true);
+        results.add(success);
+        return results;
+    }
+
+    // endregion
 }

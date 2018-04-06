@@ -8,6 +8,6 @@ import java.sql.SQLException;
 @ImplementedBy(FileDbImpl.class)
 public interface FileDb {
     PostImage addPostImage(PostImage postImage) throws SQLException;
-
     PostImage getPostImageById(Long image_id) throws SQLException;
+    void deletePostImageById(Long image_id) throws SQLException;
 }
