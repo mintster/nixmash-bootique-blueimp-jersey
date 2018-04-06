@@ -1,8 +1,12 @@
 package com.nixmash.fileupload.core;
 
 import com.nixmash.fileupload.auth.NixmashRealm;
+import com.nixmash.fileupload.db.FileDb;
+import com.nixmash.fileupload.db.FileDbImpl;
 import com.nixmash.fileupload.db.UserDb;
 import com.nixmash.fileupload.db.UserDbImpl;
+import com.nixmash.fileupload.service.FileService;
+import com.nixmash.fileupload.service.FileServiceImpl;
 import com.nixmash.fileupload.service.UserService;
 import com.nixmash.fileupload.service.UserServiceImpl;
 import io.bootique.BQRuntime;
@@ -33,6 +37,7 @@ public class TestDbBase {
     private Client client;
 
     protected static UserService userService;
+    protected static FileService fileService;
 
     protected static BQRuntime runtime;
     // region @BeforeClass and @AfterClass
@@ -48,10 +53,14 @@ public class TestDbBase {
                 .module(b -> b.bind(WebUI.class))
                 .module(b -> b.bind(UserService.class).to(UserServiceImpl.class))
                 .module(b -> b.bind(UserDb.class).to(UserDbImpl.class))
+                .module(b -> b.bind(FileService.class).to(FileServiceImpl.class))
+                .module(b -> b.bind(FileDb.class).to(FileDbImpl.class))
                 .module(b -> ShiroModule.extend(b).addRealm(NixmashRealm.class))
                 .createRuntime();
 
         userService = runtime.getInstance(UserService.class);
+        fileService = runtime.getInstance(FileService.class);
+
         //endregion
 
         DataSourceFactory datasource = runtime.getInstance(DataSourceFactory.class);

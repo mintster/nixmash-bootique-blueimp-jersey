@@ -5,11 +5,11 @@ import com.nixmash.fileupload.core.WebGlobals;
 import com.nixmash.fileupload.core.WebUI;
 import com.nixmash.fileupload.resolvers.TemplatePathResolver;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.media.multipart.BodyPartEntity;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.jvnet.mimepull.MIMEPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,6 @@ import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -68,29 +67,15 @@ public class UploadController {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("/multi")
-    public String restDemo(@FormDataParam("file") List<FormDataBodyPart> files,
-                           @FormDataParam("file") List<FormDataContentDisposition> fileDetail) throws Exception {
+    public String restDemo(@FormDataParam("file") List<FormDataBodyPart> files) throws Exception {
         List<String> uploaded = new ArrayList<>();
         for (FormDataBodyPart bodyPart : files) {
-
-            BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyPart.getEntity();
-            MIMEPart mimePart = (MIMEPart) readFieldValue("mimePart", bodyPartEntity);
-            Object dataHead = readFieldValue("dataHead", mimePart);
-            Object dataFile = readFieldValue("dataFile", dataHead);
-            File tempFile = null;
-            if (dataFile != null)
-            {
-                Object weakDataFile = readFieldValue("weak", dataFile);
-                tempFile = (File) readFieldValue("file", weakDataFile);
+            if (!bodyPart.getContentDisposition().getFileName().equals(StringUtils.EMPTY)) {
+                File tempFile = bodyPart.getValueAs(File.class);
+                String uploadedFileLocation = webGlobals.fileUploadPath + bodyPart.getContentDisposition().getFileName();
+                File file = new File(uploadedFileLocation);
+                FileUtils.copyFile(tempFile, file);
             }
-            else
-            {
-                tempFile = bodyPart.getValueAs(File.class);
-            }
-
-            String uploadedFileLocation = webGlobals.fileUploadPath + bodyPart.getContentDisposition().getFileName();
-            File file = new File(uploadedFileLocation);
-            FileUtils.copyFile(tempFile, file);
         }
         Map<String, Object> model = webUI.getBasePageInfo(MULTI_UPLOAD_PAGE);
         if (uploaded.size() > 0) {
@@ -98,14 +83,6 @@ public class UploadController {
         }
         return templatePathResolver.populateTemplate("multi.html", model);
     }
-
-    private static Object readFieldValue(String fieldName, Object o) throws Exception
-    {
-        Field field = o.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        return field.get(o);
-    }
-
     // endregion
 
     // region Single Uploads Page
