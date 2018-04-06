@@ -1,12 +1,15 @@
 package com.nixmash.fileupload.controller;
 
 import com.google.inject.Inject;
+import com.nixmash.fileupload.core.WebGlobals;
 import com.nixmash.fileupload.core.WebUI;
 import com.nixmash.fileupload.resolvers.TemplatePathResolver;
-import org.glassfish.jersey.media.multipart.ContentDisposition;
+import org.apache.commons.io.FileUtils;
+import org.glassfish.jersey.media.multipart.BodyPartEntity;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.jvnet.mimepull.MIMEPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +18,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +45,13 @@ public class UploadController {
 
     private final TemplatePathResolver templatePathResolver;
     private final WebUI webUI;
+    private final WebGlobals webGlobals;
 
     @Inject
-    public UploadController(TemplatePathResolver templatePathResolver, WebUI webUI) {
+    public UploadController(TemplatePathResolver templatePathResolver, WebUI webUI, WebGlobals webGlobals) {
         this.templatePathResolver = templatePathResolver;
         this.webUI = webUI;
+        this.webGlobals = webGlobals;
     }
 
     // endregion
@@ -60,23 +68,42 @@ public class UploadController {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("/multi")
-    public String restDemo(@FormDataParam("file") List<FormDataBodyPart> files) throws IOException {
+    public String restDemo(@FormDataParam("file") List<FormDataBodyPart> files,
+                           @FormDataParam("file") List<FormDataContentDisposition> fileDetail) throws Exception {
         List<String> uploaded = new ArrayList<>();
         for (FormDataBodyPart bodyPart : files) {
-            ContentDisposition headerOfFilePart =  bodyPart.getContentDisposition();
-            InputStream fileInputStream = bodyPart.getValueAs(InputStream.class);
-            if (fileInputStream.read() > 0) {
-                String uploadedFileLocation = "/tmp/" + headerOfFilePart.getFileName();
-                webUI.writeToFile(fileInputStream, uploadedFileLocation);
-                logger.info("File uploaded to : " + uploadedFileLocation);
-                uploaded.add(uploadedFileLocation);
+
+            BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyPart.getEntity();
+            MIMEPart mimePart = (MIMEPart) readFieldValue("mimePart", bodyPartEntity);
+            Object dataHead = readFieldValue("dataHead", mimePart);
+            Object dataFile = readFieldValue("dataFile", dataHead);
+            File tempFile = null;
+            if (dataFile != null)
+            {
+                Object weakDataFile = readFieldValue("weak", dataFile);
+                tempFile = (File) readFieldValue("file", weakDataFile);
             }
+            else
+            {
+                tempFile = bodyPart.getValueAs(File.class);
+            }
+
+            String uploadedFileLocation = webGlobals.fileUploadPath + bodyPart.getContentDisposition().getFileName();
+            File file = new File(uploadedFileLocation);
+            FileUtils.copyFile(tempFile, file);
         }
         Map<String, Object> model = webUI.getBasePageInfo(MULTI_UPLOAD_PAGE);
         if (uploaded.size() > 0) {
             model.put("uploaded", uploaded);
         }
         return templatePathResolver.populateTemplate("multi.html", model);
+    }
+
+    private static Object readFieldValue(String fieldName, Object o) throws Exception
+    {
+        Field field = o.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        return field.get(o);
     }
 
     // endregion
@@ -93,20 +120,37 @@ public class UploadController {
     @POST
     @Path("/single")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public String uploadFile(
-            @FormDataParam("file") InputStream uploadedInputStream,
+    public String uploadFileAsBodyPart(
+            @FormDataParam("file") FormDataBodyPart bodyPart,
             @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
 
         Map<String, Object> model = webUI.getBasePageInfo(SINGLE_UPLOAD_PAGE);
-        if (uploadedInputStream.read() > 0) {
-            String uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
-            webUI.writeToFile(uploadedInputStream, uploadedFileLocation);
-            logger.info("File uploaded to : " + uploadedFileLocation);
-            model.put("uploaded", uploadedFileLocation);
-        }
+        String uploadedFileLocation = webGlobals.fileUploadPath + fileDetail.getFileName();
+        File file = new File(uploadedFileLocation);
+
+        BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyPart.getEntity();
+
+        FileUtils.copyInputStreamToFile(bodyPartEntity.getInputStream(), file);
+        logger.info("File uploaded to : " + uploadedFileLocation);
+        model.put("uploaded", uploadedFileLocation);
         return templatePathResolver.populateTemplate("single.html", model);
     }
 
+    @POST
+    @Path("/inputstream/single")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public String uploadFileAsInputStream(
+            @FormDataParam("file") InputStream inputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
+
+        Map<String, Object> model = webUI.getBasePageInfo(SINGLE_UPLOAD_PAGE);
+        String uploadedFileLocation = webGlobals.fileUploadPath + fileDetail.getFileName();
+        File file = new File(uploadedFileLocation);
+        FileUtils.copyInputStreamToFile(inputStream, file);
+        logger.info("File uploaded to : " + uploadedFileLocation);
+        model.put("uploaded", uploadedFileLocation);
+        return templatePathResolver.populateTemplate("single.html", model);
+    }
 
     // endregion
 
