@@ -5,16 +5,25 @@ package com.nixmash.fileupload.enums;
  */
 public class ActiveMenu {
 
-    private Boolean demoMenu = false;
+    private Boolean uploadsMenu = false;
+    private Boolean downloadsMenu = false;
 
     public ActiveMenu() {
     }
 
-    public Boolean getDemoMenu() {
-        return demoMenu;
+    public Boolean getUploadsMenu() {
+        return uploadsMenu;
     }
 
-    public void setDemoMenu(Boolean demoMenu) {
-        this.demoMenu = demoMenu;
+    public void setUploadsMenu(Boolean uploadsMenu) {
+        this.uploadsMenu = uploadsMenu;
+    }
+
+    public Boolean getDownloadsMenu() {
+        return downloadsMenu;
+    }
+
+    public void setDownloadsMenu(Boolean downloadsMenu) {
+        this.downloadsMenu = downloadsMenu;
     }
 }

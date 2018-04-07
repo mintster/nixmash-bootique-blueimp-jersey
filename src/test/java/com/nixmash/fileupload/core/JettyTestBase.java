@@ -34,6 +34,7 @@ public class JettyTestBase {
     protected static final String SINGLE_UPLOAD_PATH = "/uploads/single";
     protected static final String MULTI_UPLOAD_PATH = "/uploads/multi";
     protected static final String BLUEIMP_PAGE_PATH = "/uploads/blueimp";
+    protected static final String DIRECT_DOWNLOAD_PATH = "/downloads/direct";
 
     @ClassRule
     public static BQTestFactory testFactory = new BQTestFactory();

@@ -1,9 +1,10 @@
 PAGE_ID,PAGE_KEY,PAGE_TITLE,HEADING,SUBHEADING,NAVBAR_MENU,SIDEBAR_MENU
 1,home,Home Page,Welcome!,Demos of Single&#44; Multiple File Uploads and Downloads,*,*
 2,error,Error Page,Oops!,*,*,*
-3,single,Single File Uploads,Single File Uploads,Select a file to be uploaded in the form below,demos,*
-4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,demos,*
-5,blueimp,BlueIimp jQuery File Upload,BlueImp jQuery File Upload Demo,Enter files to be uploaded below,demos,*
+3,single,Single File Uploads,Single File Uploads,Select a file to be uploaded in the form below,uploads,*
+4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,uploads,*
+5,blueimp,BlueIimp jQuery File Upload,BlueImp jQuery File Upload Demo,Enter files to be uploaded below,uploads,*
+6,direct,Direct File Downloads,Direct File Downloads,Click on file links to download,downloads,*
 15,login,Login,Welcome,*,*,*
 16,admin,Administration,*,*,admin,admin
 

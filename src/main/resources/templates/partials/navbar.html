@@ -13,15 +13,23 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li{{#pageinfo.activeMenu.demoMenu}} class="active" {{/pageinfo.activeMenu.demoMenu}}>
+                <li{{#pageinfo.activeMenu.uploadsMenu}} class="active" {{/pageinfo.activeMenu.uploadsMenu}}>
                 <a href="#" class="navbar-text pull-right navbar-demos dropdown-toggle"
-                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.demos{{/pageinfo.trans}}</a>
+                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.uploads{{/pageinfo.trans}}</a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="/uploads/single">Single File Upload</a>
                     </li>
                     <li><a href="/uploads/multi">Multiple File Upload</a>
                     </li>
                     <li><a href="/uploads/blueimp">BlueImp jQuery Plugin Upload</a>
+                    </li>
+                </ul>
+                </li>
+                <li{{#pageinfo.activeMenu.downloadsMenu}} class="active" {{/pageinfo.activeMenu.downloadsMenu}}>
+                <a href="#" class="navbar-text pull-right navbar-demos dropdown-toggle"
+                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.downloads{{/pageinfo.trans}}</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/downloads/direct">Direct File Download</a>
                     </li>
                 </ul>
                 </li>

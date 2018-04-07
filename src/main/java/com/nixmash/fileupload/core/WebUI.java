@@ -26,7 +26,8 @@ public class WebUI implements Serializable {
 
     private static final long serialVersionUID = 9155986213118958079L;
     private static final String NULL_FIELD = "*";
-    private static final String DEMOS_MENU = "demos";
+    private static final String UPLOADS_MENU= "uploads";
+    private static final String DOWNLOADS_MENU= "downloads";
     private static final String POSTS_SIDE_MENU = "posts";
     private static final String TAGS_SIDE_MENU = "tags";
     private static final String SEARCH_SIDE_MENU = "search";
@@ -161,8 +162,11 @@ public class WebUI implements Serializable {
             return activeMenu;
         else {
             switch (menu) {
-                case DEMOS_MENU:
-                    activeMenu.setDemoMenu(true);
+                case UPLOADS_MENU:
+                    activeMenu.setUploadsMenu(true);
+                    break;
+                case DOWNLOADS_MENU:
+                    activeMenu.setDownloadsMenu(true);
                     break;
                 default:
                     break;

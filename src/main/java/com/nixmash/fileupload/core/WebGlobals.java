@@ -22,10 +22,12 @@ public class WebGlobals implements java.io.Serializable {
 	public String baseUrl;
 	public String fileUploadPath;
 	public String thumbnailUploadPath;
+	public String downloadsPath;
+	public String downloadFileBase;
 
 	private final WebConfig webConfig;
 
-	@Inject
+    @Inject
 	public WebGlobals(WebConfig webConfig) {
 		this.webConfig = webConfig;
 
@@ -42,6 +44,8 @@ public class WebGlobals implements java.io.Serializable {
 			this.baseUrl= properties.getProperty("base.url");
 			this.fileUploadPath = properties.getProperty("file.upload.path");
 			this.thumbnailUploadPath = properties.getProperty("thumbnail.upload.path");
+			this.downloadsPath= properties.getProperty("downloads.path");
+			this.downloadFileBase= properties.getProperty("downloads.file.base");
 
 		} catch (IOException ex) {
 			logger.error(ex.getMessage());

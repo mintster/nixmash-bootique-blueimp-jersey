@@ -21,8 +21,15 @@ p.subtitle {
 .body {
     margin-top: 40px;
 }
+ol.menu {
+    margin-top: 30px;
+    font-size: 18px;
+    padding-left: 80px;
+}
+ol.menu li {
+    margin-bottom: 3px;
+}
 /*</editor-fold>*/
-
 /*<editor-fold desc="Page Header -----------------/">*/
 .page-header {
     border-bottom: none;
@@ -37,14 +44,12 @@ p.subtitle {
     text-align: right;
 }
 /*</editor-fold>*/
-
 /*<editor-fold desc="Navbar -------------------------/">*/
 a.navbar-text.pull-right.navbar-demos.dropdown-toggle,
 a.navbar-text.pull-right.navbar-welcome.dropdown-toggle {
     margin: 0;
 }
 /*</editor-fold>*/
-
 /*<editor-fold desc="File Uploads -------------------------------/ ">*/
 input.file-input {
     padding: 12px 0;
@@ -67,7 +72,6 @@ form.multifile button.btn-sm {
     border-radius: 50%;
 }
     /*</editor-fold>*/
-
 /*<editor-fold desc="Footer ------------------------------/">*/
 #footer {
     margin: 0;
