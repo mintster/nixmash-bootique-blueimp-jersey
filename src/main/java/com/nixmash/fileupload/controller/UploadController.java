@@ -75,6 +75,7 @@ public class UploadController {
                 String uploadedFileLocation = webGlobals.fileUploadPath + bodyPart.getContentDisposition().getFileName();
                 File file = new File(uploadedFileLocation);
                 FileUtils.copyFile(tempFile, file);
+                uploaded.add(uploadedFileLocation);
             }
         }
         Map<String, Object> model = webUI.getBasePageInfo(MULTI_UPLOAD_PAGE);

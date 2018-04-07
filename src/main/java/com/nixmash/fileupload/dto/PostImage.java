@@ -14,7 +14,7 @@ public class PostImage implements Serializable {
 
     private Long id;
     private Long postId;
-    private String name;
+    private String imageName;
     private String thumbnailFilename;
     private String newFilename;
     private String contentType;
@@ -25,6 +25,8 @@ public class PostImage implements Serializable {
             (shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss")
     private Date dateCreated;
 
+
+    private String name;
     private String url;
     private String thumbnailUrl;
     private String deleteUrl;
@@ -43,12 +45,16 @@ public class PostImage implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getName() {
+        return this.imageName;
     }
 
     public String getThumbnailFilename() {

@@ -46,7 +46,7 @@ public class FileServiceImplTest extends TestDbBase {
     private PostImage createPostImage() {
         PostImage postImage = new PostImage();
         postImage.setPostId(-1L);
-        postImage.setName("test.png");
+        postImage.setImageName("test.png");
         postImage.setNewFilename("test.png");
         postImage.setThumbnailFilename("test.png");
         postImage.setSize(100L);

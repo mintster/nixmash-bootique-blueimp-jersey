@@ -96,7 +96,7 @@ public class FileDbImpl implements FileDb {
     private void populatePostImage(ResultSet rs, PostImage postImage) throws SQLException {
         postImage.setId(rs.getLong("image_id"));
         postImage.setPostId(rs.getLong("post_id"));
-        postImage.setName(rs.getString("image_name"));
+        postImage.setImageName(rs.getString("image_name"));
         postImage.setThumbnailFilename(rs.getString("thumbnail_filename"));
         postImage.setNewFilename(rs.getString("filename"));
         postImage.setContentType(rs.getString("content_type"));

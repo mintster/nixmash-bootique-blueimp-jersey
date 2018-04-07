@@ -18,8 +18,8 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="file1" class="col-lg-3 control-label">Select File</label>
-                            <div class="col-lg-9">
-                                <input type="file" name="file" id="file1" class="file-input" />
+                            <div class="col-lg-5">
+                                <input type="file" name="file" id="file1" class="filestyle" data-btnClass="btn-success" />
                             </div>
                         </div>
                         <div id="newfile"></div>
@@ -48,9 +48,11 @@
     var fileIndex = 2;
     var baseUrl = "/rest/addfile/";
 
-    function addFileRow() {
+        function addFileRow() {
         $.get(baseUrl + fileIndex, function (data) {
             $("#newfile").append(data);
+            var fileId = "#file" + fileIndex;
+            $(fileId).filestyle({btnClass: "btn-success"});
             fileIndex++;
         });
     }

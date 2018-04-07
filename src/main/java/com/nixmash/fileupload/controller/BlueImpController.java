@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Path("/uploads")
 public class BlueImpController {
@@ -40,6 +42,8 @@ public class BlueImpController {
     // region Constants
 
     private static final String BLUEIMP_PAGE = "blueimp";
+    private static final String IMAGE_PATTERN = "([^\\s]+(\\.(?i)(jpg|png|gif))$)";
+    private Pattern pattern;
 
     // endregion
 
@@ -76,6 +80,7 @@ public class BlueImpController {
     @Path("/blueimp")
     public Map<String, Object> blueImpPageSubmit(@FormDataParam("files[]") List<FormDataBodyPart> uploaded) throws IOException {
         List<PostImage> list = new ArrayList<PostImage>();
+        pattern = Pattern.compile(IMAGE_PATTERN);
 
         for (FormDataBodyPart bodyPart : uploaded) {
             ContentDisposition fileDetails = bodyPart.getContentDisposition();
@@ -83,6 +88,10 @@ public class BlueImpController {
             String filename = fileDetails.getFileName();
 
             if (!filename.equals(StringUtils.EMPTY)) {
+
+                // only png/gif/jpg files accepted
+                if (!isValidImageFile(filename))
+                    break;
 
                 String fileExtension = FilenameUtils.getExtension(filename).toLowerCase();
                 String uploadedFileLocation = webGlobals.fileUploadPath + filename;
@@ -101,7 +110,7 @@ public class BlueImpController {
 
                 PostImage image = new PostImage();
                 image.setPostId(-1L);
-                image.setName(filename);
+                image.setImageName(filename);
                 image.setThumbnailFilename(filename);
                 image.setNewFilename(filename);
                 image.setContentType(String.valueOf(bodyPart.getMediaType()));
@@ -171,6 +180,15 @@ public class BlueImpController {
         success.put("success", true);
         results.add(success);
         return results;
+    }
+
+    // endregion
+
+    // region private utility methods
+
+    private boolean isValidImageFile(final String image) {
+        Matcher matcher = pattern.matcher(image);
+        return matcher.matches();
     }
 
     // endregion
