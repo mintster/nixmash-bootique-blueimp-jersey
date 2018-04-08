@@ -31,10 +31,12 @@ public class JettyTestBase {
     public static final String TEST_URL = "http://127.0.1.1:8001";
 
     protected static final String HOME_PAGE_PATH = "/";
+    protected static final String UNAUTHORIZED_PAGE_PATH = "/unauthorized";
+    protected static final String LOGIN_PAGE_PATH = "/login";
     protected static final String SINGLE_UPLOAD_PATH = "/uploads/single";
     protected static final String MULTI_UPLOAD_PATH = "/uploads/multi";
     protected static final String BLUEIMP_PAGE_PATH = "/uploads/blueimp";
-    protected static final String DIRECT_DOWNLOAD_PATH = "/downloads/direct";
+    protected static final String DOWNLOADS_PATH = "/downloads";
 
     @ClassRule
     public static BQTestFactory testFactory = new BQTestFactory();

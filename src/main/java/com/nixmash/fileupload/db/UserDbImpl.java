@@ -3,7 +3,6 @@ package com.nixmash.fileupload.db;
 import com.google.inject.Inject;
 import com.nixmash.fileupload.core.WebConfig;
 import com.nixmash.fileupload.dto.Role;
-import com.nixmash.fileupload.dto.SocialUser;
 import com.nixmash.fileupload.dto.User;
 import io.bootique.jdbc.DataSourceFactory;
 import org.slf4j.Logger;
@@ -108,96 +107,6 @@ public class UserDbImpl implements UserDb {
         return user;
     }
 
-    // endregion
-
-    // region Twitter Users
-    @Override
-    public SocialUser addSocialUser(SocialUser socialUser) {
-        {
-            try (Connection connection = dataSource.forName(webConfig.datasourceName).getConnection()) {
-                try (Statement statement = connection.createStatement()) {
-                    String sql = "INSERT INTO user_social(username, provider_id, provider_userid, screen_name, display_name, profile_url, image_url, access_token, secret) " +
-                            "VALUES (" +
-                            "'" + socialUser.getUsername() + "'," +
-                            "'" + socialUser.getProviderId() + "'," +
-                            "'" + socialUser.getProviderUserid() + "'," +
-                            "'" + socialUser.getScreenName() + "'," +
-                            "'" + socialUser.getDisplayName() + "'," +
-                            "'" + socialUser.getProfileUrl() + "'," +
-                            "'" + socialUser.getImageUrl() + "'," +
-                            "'" + socialUser.getAccessToken() + "'," +
-                            "'" + socialUser.getSecret() + "'" +
-                            ")";
-                    int result = statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                    if (result == 1) {
-                        ResultSet generatedKeys = statement.getGeneratedKeys();
-                        if (generatedKeys.next()) {
-                            socialUser.setSocialId(generatedKeys.getLong(1));
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                logger.info("Error creating new SocialUser: " + e.getMessage());
-            }
-            return socialUser;
-        }
-    }
-
-    @Override
-    public SocialUser getSocialUser(String username) {
-        SocialUser socialUser = new SocialUser();
-        try (Connection cn = dataSource.forName(webConfig.datasourceName).getConnection()) {
-
-            try (Statement statement = cn.createStatement()) {
-                String getUserSql = "SELECT * FROM user_social WHERE username = '" + username + "'";
-                ResultSet rs = statement.executeQuery(getUserSql);
-                while (rs.next()) {
-                    populateSocialUser(rs, socialUser);
-                }
-                rs.close();
-                cn.close();
-            }
-        } catch (SQLException | NullPointerException e) {
-            logger.info("Error retrieving user: " + e.getMessage());
-        }
-        return socialUser;
-    }
-
-    @Override
-    public SocialUser getSocialUserByAccessToken(String accessToken, String secret) {
-        SocialUser socialUser = new SocialUser();
-        try (Connection cn = dataSource.forName(webConfig.datasourceName).getConnection()) {
-
-            try (Statement statement = cn.createStatement()) {
-                String getUserSql = "SELECT * FROM user_social WHERE access_token = '" + accessToken + "' " +
-                        "AND secret = '" + secret + "'";
-                ResultSet rs = statement.executeQuery(getUserSql);
-                while (rs.next()) {
-                    populateSocialUser(rs, socialUser);
-                }
-                rs.close();
-                cn.close();
-            }
-        } catch (SQLException | NullPointerException e) {
-            logger.info("Error retrieving user: " + e.getMessage());
-        }
-        return socialUser;
-    }
-
-    private void populateSocialUser(ResultSet rs, SocialUser socialUser) throws SQLException {
-        socialUser.setSocialId(rs.getLong("social_id"));
-        socialUser.setUsername(rs.getString("username"));
-        socialUser.setProviderId(rs.getString("provider_id"));
-        socialUser.setProviderUserid(rs.getString("provider_userid"));
-        socialUser.setScreenName(rs.getString("screen_name"));
-        socialUser.setDisplayName(rs.getString("display_name"));
-        socialUser.setProfileUrl(rs.getString("profile_url"));
-        socialUser.setImageUrl(rs.getString("image_url"));
-        socialUser.setAccessToken(rs.getString("access_token"));
-        socialUser.setSecret(rs.getString("secret"));
-        socialUser.setRefreshToken(rs.getString("refresh_token"));
-        socialUser.setExpireTime(rs.getLong("expire_time"));
-    }
     // endregion
 
 }

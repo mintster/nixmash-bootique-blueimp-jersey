@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            <div class="body">
+                <h3>You are not authorized to download the file</h3>
+                <p>To download this file, login with the user who has the appropriate roles for the file you wish to download.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{> templates/partials/userinfo.html }}
+
+{{> templates/partials/footer.html }}
+
+</body>
+</html>

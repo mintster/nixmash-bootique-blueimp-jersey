@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class GeneralControllerTest extends JettyTestBase {
 
     private static final CharSequence HOME_PAGE_STRING = "Home Page";
+    private static final CharSequence UNAUTHORIZED_PAGE_STRING = "Unauthorized";
 
     @Test
     public void home() {
@@ -21,5 +22,14 @@ public class GeneralControllerTest extends JettyTestBase {
         Response response = pathResponse(HOME_PAGE_PATH);
         String html = response.readEntity(String.class);
         assertTrue(html.contains(HOME_PAGE_STRING));
+    }
+
+    @Test
+    public void unauthorizedPage() {
+        assertTrue(responseOK(pathResponse(UNAUTHORIZED_PAGE_PATH)));
+
+        Response response = pathResponse(UNAUTHORIZED_PAGE_PATH);
+        String html = response.readEntity(String.class);
+        assertTrue(html.contains(UNAUTHORIZED_PAGE_STRING));
     }
 }

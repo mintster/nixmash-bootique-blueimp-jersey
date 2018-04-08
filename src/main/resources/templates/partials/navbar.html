@@ -26,34 +26,17 @@
                 </ul>
                 </li>
                 <li{{#pageinfo.activeMenu.downloadsMenu}} class="active" {{/pageinfo.activeMenu.downloadsMenu}}>
-                <a href="#" class="navbar-text pull-right navbar-demos dropdown-toggle"
-                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.downloads{{/pageinfo.trans}}</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="/downloads/direct">Direct File Download</a>
-                    </li>
-                </ul>
+                <a href="/downloads">{{#pageinfo.trans}}navbar.downloads{{/pageinfo.trans}}</a>
                 </li>
-                {{#user.administrator}}
-                <li>
-                    <a href="#" class="navbar-text pull-right navbar-welcome dropdown-toggle"
-                       data-toggle="dropdown">{{#pageinfo.trans}}navbar.admin{{/pageinfo.trans}}</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/admin">Dashboard</a>
-                        </li>
-                        <li><a href="/admin/posts/new">Add New Post</a>
-                        </li>
-                    </ul>
-                </li>
-                {{/user.administrator}}
             </ul>
             <div class="navbar-right">
                 {{^user}}<a class="navbar-text margin-5" href="/login">Login</a>{{/user}}
                 {{#user}}
                 <form class="navbar-form pull-right" action="/logout" method="get">
-                    <input type="submit" value="Log out" class="btn btn-info btn-sm"/>
+                    <input type="submit" value="Log out" class="btn btn-info btn-sm btn-navbar"/>
                 </form>
 
-                <img class="navbar-profilepic pull-right" src="/img/{{userId}}.jpg" width="32" height="32"/>
+                <img class="navbar-profilepic pull-right" src="/img/user32x32.png" width="32" height="32"/>
 
                 <span class="navbar-text">Welcome {{displayName}}!</span>{{/user}}
             </div>

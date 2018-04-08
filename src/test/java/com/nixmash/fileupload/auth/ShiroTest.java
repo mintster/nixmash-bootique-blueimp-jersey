@@ -71,7 +71,7 @@ public class ShiroTest extends TestDbBase {
     public void currentUserTest() throws Exception {
         Subject subject = new Subject.Builder(runtime.getInstance(SecurityManager.class)).buildSubject();
         subject.login(new UsernamePasswordToken("bob", "password"));
-        CurrentUser currentUser = userService.createCurrentUser(subject);
+        CurrentUser currentUser = userService.getCurrentUser(subject);
         Assert.assertTrue((boolean) currentUser.getAdministrator());
     }
 }

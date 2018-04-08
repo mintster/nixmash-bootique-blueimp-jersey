@@ -10,14 +10,14 @@ import static org.junit.Assert.*;
 public class DownloadControllerTest extends JettyTestBase {
 
 
-    private static final String DIRECT_PAGE_STRING = "Direct File Downloads";
+    private static final String DOWNLOADS_FILE_STRING = "File Downloads";
 
     @Test
     public void getDirectDownloadPage() {
-        assertTrue(responseOK(pathResponse(DIRECT_DOWNLOAD_PATH)));
+        assertTrue(responseOK(pathResponse(DOWNLOADS_PATH)));
 
-        Response response = pathResponse(DIRECT_DOWNLOAD_PATH);
+        Response response = pathResponse(DOWNLOADS_PATH);
         String html = response.readEntity(String.class);
-        assertTrue(html.contains(DIRECT_PAGE_STRING));
+        assertTrue(html.contains(DOWNLOADS_FILE_STRING));
     }
 }

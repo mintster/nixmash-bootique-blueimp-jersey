@@ -2,9 +2,11 @@ package com.nixmash.fileupload.core;
 
 import com.github.mustachejava.functions.TranslateBundleFunction;
 import com.google.inject.Inject;
+import com.nixmash.fileupload.dto.CurrentUser;
 import com.nixmash.fileupload.dto.PageInfo;
 import com.nixmash.fileupload.enums.ActiveMenu;
 import com.nixmash.fileupload.enums.SidebarMenu;
+import com.nixmash.fileupload.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.shiro.SecurityUtils;
@@ -14,6 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
+
+import static com.nixmash.fileupload.service.UserServiceImpl.CURRENT_USER;
 
 
 /**
@@ -42,10 +46,12 @@ public class WebUI implements Serializable {
     // region Constructor
 
     private final WebContext webContext;
+    private final UserService userService;
 
     @Inject
-    public WebUI(WebContext webContext) {
+    public WebUI(WebContext webContext, UserService userService) {
         this.webContext = webContext;
+        this.userService = userService;
     }
 
     // endregion
@@ -223,7 +229,7 @@ public class WebUI implements Serializable {
         Map<String, Object> model = new HashMap<>();
         model.put("pageinfo", getPageInfo(pageId));
 
-/*        Session session = SecurityUtils.getSubject().getSession();
+        Session session = SecurityUtils.getSubject().getSession();
         if (SecurityUtils.getSubject().getPrincipals() != null) {
             CurrentUser currentUser =  (CurrentUser) session.getAttribute(CURRENT_USER);
             if (currentUser == null) {
@@ -231,7 +237,7 @@ public class WebUI implements Serializable {
                 session.setAttribute(CURRENT_USER, currentUser);
             }
             model.put("user", currentUser);
-        }*/
+        }
         return model;
     }
 

@@ -8,10 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
@@ -22,7 +19,7 @@ import java.util.Map;
 public class DownloadController {
 
     private static final Logger logger = LoggerFactory.getLogger(DownloadController.class);
-    private static final String DIRECT_DOWNLOAD_PAGE = "direct";
+    private static final String DOWNLOAD_PAGE = "downloads";
 
     private final TemplatePathResolver templatePathResolver;
     private final WebUI webUI;
@@ -36,18 +33,39 @@ public class DownloadController {
     }
 
     @GET
-    @Path("/direct")
-    public String getDirectDownloadPage() {
-        Map<String, Object> model = webUI.getBasePageInfo(DIRECT_DOWNLOAD_PAGE);
-        return templatePathResolver.populateTemplate("direct.html", model);
+    public String getDownloadPage(@QueryParam("msg") String msg) {
+        Map<String, Object> model = webUI.getBasePageInfo(DOWNLOAD_PAGE);
+        if (msg != null) {
+            msg = msg.equals("users") ? "USER" : "ADMIN";
+            model.put("msg", msg);
+        }
+        return templatePathResolver.populateTemplate("downloads.html", model);
     }
 
     @GET
-    @Path("/direct/{ext}")
-    public Response downloadPdfFile(@PathParam("ext") String ext)
+    @Path("/public/{ext}")
+    public Response downloadPublicFile(@PathParam("ext") String ext)
     {
-        String downloadsPath = webGlobals.downloadsPath;
         String filename = String.format("%s.%s", webGlobals.downloadFileBase, ext);
+        return getFile(filename);
+    }
+
+    @GET
+    @Path("/users")
+    public Response downloadUserFile()
+    {
+        return getFile(webGlobals.userDownloadFilename);
+    }
+
+    @GET
+    @Path("/admin")
+    public Response downloadAdminFile()
+    {
+        return getFile(webGlobals.adminDownloadFilename);
+    }
+    
+    public Response getFile(String filename) {
+        String downloadsPath = webGlobals.downloadsPath;
         StreamingOutput fileStream = output -> {
             try
             {
@@ -66,5 +84,4 @@ public class DownloadController {
                 .header("content-disposition","attachment; filename = " + filename)
                 .build();
     }
-
 }

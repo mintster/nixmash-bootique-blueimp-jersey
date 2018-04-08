@@ -3,11 +3,15 @@ package com.nixmash.fileupload.controller;
 import com.google.inject.Inject;
 import com.nixmash.fileupload.core.WebUI;
 import com.nixmash.fileupload.resolvers.TemplatePathResolver;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
@@ -21,6 +25,7 @@ public class GeneralController {
     // region Constants
 
     private static final String HOME_PAGE = "home";
+    private static final String UNAUTHORIZED_PAGE = "unauthorized";
 
     // endregion
 
@@ -47,4 +52,30 @@ public class GeneralController {
 
     // endregion
 
+    // region login/logout redirection
+
+    @GET
+    @Path("/login.jsp")
+    public Response redirectLogin() throws URISyntaxException {
+        URI targetURIForRedirection = new URI("/login");
+        return Response.seeOther(targetURIForRedirection).build();
+    }
+
+    @GET
+    @Path("/logout")
+    public Response logout() throws URISyntaxException {
+        SecurityUtils.getSubject().logout();
+        URI targetURIForRedirection = new URI("/?logout=true");
+        return Response.temporaryRedirect(targetURIForRedirection).build();
+    }
+
+    // endregion
+
+
+    @GET
+    @Path("/unauthorized")
+    public String unauthorized() {
+        Map<String, Object> model = webUI.getBasePageInfo(UNAUTHORIZED_PAGE);
+        return templatePathResolver.populateTemplate("unauthorized.html", model);
+    }
 }

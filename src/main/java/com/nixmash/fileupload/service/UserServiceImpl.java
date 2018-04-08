@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.nixmash.fileupload.db.UserDb;
 import com.nixmash.fileupload.dto.CurrentUser;
 import com.nixmash.fileupload.dto.Role;
-import com.nixmash.fileupload.dto.SocialUser;
 import com.nixmash.fileupload.dto.User;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
@@ -51,7 +50,7 @@ public class UserServiceImpl implements UserService{
     // region CurrentUser
 
     @Override
-    public CurrentUser createCurrentUser(Subject subject) {
+    public CurrentUser getCurrentUser(Subject subject) {
         User user = this.getUser(subject.getPrincipals().toString());
         CurrentUser currentUser = new CurrentUser(user);
         List<Role> roles = this.getRoles(user.getUserId());
@@ -66,25 +65,7 @@ public class UserServiceImpl implements UserService{
         return currentUser;
     }
 
+
     // endregion
 
-    // region Social Users
-
-    @Override
-    public SocialUser addSocialUser(SocialUser user) {
-        logger.info("Adding Social User with screen name: " + user.getScreenName());
-        return userDb.addSocialUser(user);
-    }
-
-    @Override
-    public SocialUser getSocialUser(String username) {
-        return userDb.getSocialUser(username);
-    }
-
-    @Override
-    public SocialUser getSocialUser(String accessToken, String secret) {
-        SocialUser socialUser = userDb.getSocialUserByAccessToken(accessToken, secret);
-        return socialUser;
-    }
-    // endregion
 }

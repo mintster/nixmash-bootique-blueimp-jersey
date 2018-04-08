@@ -1,8 +1,10 @@
 package com.nixmash.fileupload.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CurrentUser implements Serializable{
 
@@ -15,6 +17,8 @@ public class CurrentUser implements Serializable{
     private Set<String> permissions = new HashSet<>();
     private Boolean isAdministrator = false;
     private String displayName;
+    private String permissionList;
+    private String roleList;
 
     public CurrentUser() {
     }
@@ -84,6 +88,15 @@ public class CurrentUser implements Serializable{
         this.displayName = displayName;
     }
 
+    public String getPermissionList() {
+        return new ArrayList<String>(this.getPermissions()).stream()
+                .collect(Collectors.joining(", "));
+    }
+
+    public String getRoleList() {
+        return new ArrayList<String>(this.getRoles()).stream()
+                .collect(Collectors.joining(", "));
+    }
     // endregion
 
 

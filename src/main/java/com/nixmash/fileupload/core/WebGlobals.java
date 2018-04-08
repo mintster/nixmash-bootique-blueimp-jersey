@@ -24,6 +24,8 @@ public class WebGlobals implements java.io.Serializable {
 	public String thumbnailUploadPath;
 	public String downloadsPath;
 	public String downloadFileBase;
+	public String userDownloadFilename;
+	public String adminDownloadFilename;
 
 	private final WebConfig webConfig;
 
@@ -46,6 +48,8 @@ public class WebGlobals implements java.io.Serializable {
 			this.thumbnailUploadPath = properties.getProperty("thumbnail.upload.path");
 			this.downloadsPath= properties.getProperty("downloads.path");
 			this.downloadFileBase= properties.getProperty("downloads.file.base");
+			this.userDownloadFilename= properties.getProperty("downloads.users.filename");
+			this.adminDownloadFilename= properties.getProperty("downloads.admin.filename");
 
 		} catch (IOException ex) {
 			logger.error(ex.getMessage());
