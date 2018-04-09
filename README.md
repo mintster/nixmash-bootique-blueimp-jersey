@@ -25,6 +25,7 @@ Here's a sample configuration: If your username was **billy** and you copied the
 global.properties.file=/fileuploader/global.properties
 config.path=/fileuploader
 ```
+*BE SURE TO MAKE THE SAME UPDATES TO **/test/resources/test.properties** FOR TESTS*
 
 4. Update the external `global.properties` file. If, again, your username was **billy** and you copied the `/config` folder to `/home/billy/fileuploader` the properties in your external `global.properties` file would read as shown below, since we are entering *the full filepath* here.
 
