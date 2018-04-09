@@ -68,7 +68,7 @@ public class TestDbBase {
         Connection connection = datasource.forName(webConfig.datasourceName).getConnection();
 
         String sql = webConfig.configPath + "/test.sql";
-        if (webConfig.datasourceName.equals("MySqlTest")) {
+        if (webConfig.datasourceName.equals("H2")) {
             File script = new File(sql);
             ScriptRunner sr = new ScriptRunner(connection);
             sr.setLogWriter(null);

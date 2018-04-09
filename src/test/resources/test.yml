@@ -8,26 +8,12 @@ jetty:
 mvc:
   templateBase: "classpath:"
 
-#log:
-#  level: debug
-#  loggers:
-#    org.apache.shiro:
-#      level: debug
-#    org.apache.jetty:
-#      level: debug
-
 jdbc:
-  MySqlTest:
-    url:  jdbc:mysql://localhost:3306/uploadertestdb
-    driverClassName: com.mysql.jdbc.Driver
-    username: devuser
-    password: password
-    validationQuery: "SELECT 1"
-    testOnBorrow: true
-    testWhileIdle: true
-
-jdbctest:
-  quoteIdentifiers: true
+  H2:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
 
 shiroweb:
   urls:
