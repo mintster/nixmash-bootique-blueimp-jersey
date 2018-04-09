@@ -35,7 +35,6 @@ shiroweb:
     "/users"   : authc
     "/login" : anon
     "/" : anon
-    "/authorized" : anon
 
 
 

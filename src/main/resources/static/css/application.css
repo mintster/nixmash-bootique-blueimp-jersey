@@ -19,7 +19,7 @@ p.subtitle {
     font-size: 18px;
 }
 .body {
-    margin-top: 40px;
+    margin-top: 0;
 }
 ol.menu {
     margin: 20px auto 40px auto;
@@ -31,9 +31,6 @@ ol.menu li {
 }
 /*</editor-fold>*/
 /*<editor-fold desc="Login Form ----------------------------/">*/
-.body.login-body {
-    margin-top: 0;
-}
 h2.login-title {
     margin-bottom: 20px;
 }

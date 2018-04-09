@@ -67,7 +67,7 @@ public class TestDbBase {
         WebConfig webConfig = runtime.getInstance(WebConfig.class);
         Connection connection = datasource.forName(webConfig.datasourceName).getConnection();
 
-        String sql = webConfig.configPath + "/populate.sql";
+        String sql = webConfig.configPath + "/test.sql";
         if (webConfig.datasourceName.equals("MySqlTest")) {
             File script = new File(sql);
             ScriptRunner sr = new ScriptRunner(connection);

@@ -13,15 +13,10 @@
         <div class="content">
             {{> templates/partials/lead.html }}
             {{#msg}}
-            <script id="template-alert-message" type="text/x-handlebars-template">
                 <div id="alert-message" class="alert alert-success fade in">
                     <a class="close" data-dismiss="alert">&times;</a>
                     <p>You can now download all <strong><em>{{msg}}</em></strong> accessible files.
                 </div>
-            </script>
-            <div id="message-holder">
-                <div class="messageblock hidden"><p>You can now download all <strong><em>{{msg}}</em></strong> accessible files.</div>
-            </div>
             {{/msg}}
             <div class="body">
                 <h3>Public Downloads</h3>

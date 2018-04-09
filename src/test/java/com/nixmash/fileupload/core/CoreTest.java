@@ -63,7 +63,7 @@ public class CoreTest extends TestBase {
     @Test
     public void createUserKeyTests() {
         String userKey = RandomStringUtils.randomAlphanumeric(25);
-//        System.out.println(userKey);
+        System.out.println(userKey);
         assertEquals(userKey.length(),25);
 
         String uuidKey= UUID.randomUUID().toString();

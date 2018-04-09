@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class BlueImpControllerTest extends JettyTestBase {
 
-    private static final String BLUEIMP_PAGE_STRING = "BlueIimp jQuery File Upload";
+    private static final String BLUEIMP_PAGE_STRING = "BlueImp jQuery File Upload";
 
 
     @Test
