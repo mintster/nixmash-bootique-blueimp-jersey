@@ -17,9 +17,9 @@ This NixMash app demonstrates File Uploading and Downloading with Jersey, specif
 
 1. BlueImp File Uploading stores file data to a MySQL database, so create a MySQL database and configure the connection in `/resources/bootique.yml.`
 2. Run the MySQL Setup Script located in `/install/sql/setup.sql.`
-3. You'll notice a `/install/config` directory. This is your *EXTERNAL CONFIGURATION* directory which must be located under your `/home/username` directory. Copy the folder and its contents and enter the location in `/resources/fileuploader.properties.`
+3. You'll notice a `/install/config` directory. This is your *EXTERNAL CONFIGURATION* directory which must be located under your `/home/username` directory. Copy the config folder's contents to a subdirectory in your home directory, then enter that subdirectory path in the`/resources/fileuploader.properties` file.
 
-Here's a sample configuration: If your username was **billy** and you copied the `/config` folder to `/home/billy/fileuploader` then the properties in `fileuploader.properties` would read as follows, because the properties path indicates a subdirectory path to your user home directory.
+Here's a sample configuration: If your username was **billy** and you copied the `/config` folder to `/home/billy/fileuploader` then the properties in `fileuploader.properties` would read as follows. Notice the paths indicate the subdirectory path from your user home directory.
 
 ```properties
 global.properties.file=/fileuploader/global.properties
@@ -27,7 +27,7 @@ config.path=/fileuploader
 ```
 *BE SURE TO MAKE THE SAME UPDATES TO **/test/resources/test.properties** FOR TESTS*
 
-4. Update the external `global.properties` file. If, again, your username was **billy** and you copied the `/config` folder to `/home/billy/fileuploader` the properties in your external `global.properties` file would read as shown below, since we are entering *the full filepath* here.
+4. Update the external `global.properties` file. If, as in our example, your username was **billy** and you copied the `/config` folder to `/home/billy/fileuploader` the properties in your external `global.properties` file would read as shown below, since we are entering *the full filepath* here.
 
 ```properties
 file.upload.path=/home/billy/fileuploader/files/
@@ -36,4 +36,4 @@ downloads.path=/home/billy/fileuploader/downloads/
 ```
 
 
-*LAST UPDATED: 4/9/18*
+*LAST UPDATED: 4/10/18*
