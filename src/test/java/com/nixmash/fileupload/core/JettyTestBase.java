@@ -2,10 +2,6 @@ package com.nixmash.fileupload.core;
 
 import com.nixmash.fileupload.auth.NixmashRealm;
 import com.nixmash.fileupload.controller.GeneralController;
-import com.nixmash.fileupload.db.UserDb;
-import com.nixmash.fileupload.db.UserDbImpl;
-import com.nixmash.fileupload.service.UserService;
-import com.nixmash.fileupload.service.UserServiceImpl;
 import io.bootique.BQRuntime;
 import io.bootique.jersey.JerseyModule;
 import io.bootique.shiro.ShiroModule;
@@ -13,6 +9,7 @@ import io.bootique.shiro.web.ShiroWebModule;
 import io.bootique.test.junit.BQTestFactory;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.media.multipart.internal.MultiPartWriter;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -58,9 +55,8 @@ public class JettyTestBase {
                 .autoLoadModules()
                 .args("-s","--config=classpath:test.yml")
                 .module(b -> b.bind(WebUI.class))
-                .module(b -> JerseyModule.extend(b).addPackage(pkg).addFeature(MultiPartFeature.class))
-                .module(b -> b.bind(UserService.class).to(UserServiceImpl.class))
-                .module(b -> b.bind(UserDb.class).to(UserDbImpl.class))
+                .module(b -> JerseyModule.extend(b).addPackage(pkg)
+                        .addFeature(MultiPartFeature.class))
                 .module(b -> ShiroModule.extend(b).addRealm(NixmashRealm.class))
                 .module(b -> ShiroWebModule.extend(b).initAllExtensions())
                 .createRuntime();
@@ -72,6 +68,7 @@ public class JettyTestBase {
         webGlobals= runtime.getInstance(WebGlobals.class);
 
         ClientConfig config = new ClientConfig();
+        config.register(MultiPartWriter.class);
         client = ClientBuilder.newClient(config);
     }
 
@@ -79,6 +76,10 @@ public class JettyTestBase {
 
     @Test
     public void loadsTest() {
+    }
+
+    protected WebTarget getTargetUrl(String path) {
+        return client.target(TEST_URL + path);
     }
 
     protected Response pathResponse(String path) {

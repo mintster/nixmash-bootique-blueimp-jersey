@@ -135,3 +135,11 @@ form.multifile button.btn-sm {
     margin: 40px auto;
 }
 /*</editor-fold>*/
+/*<editor-fold desc="Contact Form ------------------------/">*/
+textarea.mail-body {
+    word-break: keep-all;
+    resize: none;
+    width: 100%;
+    padding: 12px;
+}
+/*</editor-fold>*/

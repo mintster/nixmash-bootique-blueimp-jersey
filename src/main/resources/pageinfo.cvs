@@ -5,6 +5,7 @@ PAGE_ID,PAGE_KEY,PAGE_TITLE,HEADING,SUBHEADING,NAVBAR_MENU,SIDEBAR_MENU
 4,multi,Multiple File Uploads,Multiple File Upload Demo,Enter files to be uploaded in the form below,uploads,*
 5,blueimp,BlueImp jQuery File Upload,BlueImp jQuery File Upload Demo,Enter files to be uploaded below,uploads,*
 6,downloads,File Downloads,File Downloads,Click on file links to download,downloads,*
+7,contact,Email Demo,Contact Us,Enter your name&#44; email address and message below,other,*
 15,login,Login,Please Login,*,*,*
 16,admin,Administration,*,*,admin,admin
 17,unauthorized,Unauthorized,Unauthorized,*,downloads,*

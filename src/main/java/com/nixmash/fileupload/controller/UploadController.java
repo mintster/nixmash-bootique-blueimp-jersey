@@ -72,7 +72,8 @@ public class UploadController {
         for (FormDataBodyPart bodyPart : files) {
             if (!bodyPart.getContentDisposition().getFileName().equals(StringUtils.EMPTY)) {
                 File tempFile = bodyPart.getValueAs(File.class);
-                String uploadedFileLocation = webGlobals.fileUploadPath + bodyPart.getContentDisposition().getFileName();
+                String uploadedFileLocation = webGlobals.fileUploadPath +
+                        bodyPart.getContentDisposition().getFileName();
                 File file = new File(uploadedFileLocation);
                 FileUtils.copyFile(tempFile, file);
                 uploaded.add(uploadedFileLocation);
@@ -84,6 +85,8 @@ public class UploadController {
         }
         return templatePathResolver.populateTemplate("multi.html", model);
     }
+
+
     // endregion
 
     // region Single Uploads Page

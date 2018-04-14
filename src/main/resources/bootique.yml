@@ -32,8 +32,8 @@ jdbc:
 
 shiroweb:
   urls:
-    "/downloads/users"   : authc
-    "/downloads/admin"   : roles[admin]
+    "/downloads/users/**"   : authc
+    "/downloads/admin/**"   : roles[admin]
     "/login" : anon
     "/" : anon
 

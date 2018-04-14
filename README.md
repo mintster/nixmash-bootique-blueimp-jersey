@@ -7,7 +7,7 @@ This NixMash app demonstrates File Uploading and Downloading with Jersey, specif
 | --- | --- | 
 | *Single File Uploads* | *Multiple File Uploads* | 
 | *Multiple File Uploads with the BlueImp jQuery File Upload Plugin* | *File Downloads with .TXT, .JPG, ODT, TAR.GZ, and PDF files* |
-| *Secure File Downloads w/ Multiple Roles* ||
+| *Secure File Downloads w/ Multiple Roles* | *Email Contact Form with Javax Mail* |
 
 ## BlueImp jQuery File Upload Plugin Integration with Jersey ##
 

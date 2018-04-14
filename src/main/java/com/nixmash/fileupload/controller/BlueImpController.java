@@ -78,7 +78,8 @@ public class BlueImpController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/blueimp")
-    public Map<String, Object> blueImpPageSubmit(@FormDataParam("files[]") List<FormDataBodyPart> uploaded) throws IOException {
+    public Map<String, Object> blueImpPageSubmit(@FormDataParam("files[]")
+                                                             List<FormDataBodyPart> uploaded) throws IOException {
         List<PostImage> list = new ArrayList<PostImage>();
         pattern = Pattern.compile(IMAGE_PATTERN);
 
@@ -93,11 +94,14 @@ public class BlueImpController {
                 if (!isValidImageFile(filename))
                     break;
 
+                //region Upload file as normally
                 String fileExtension = FilenameUtils.getExtension(filename).toLowerCase();
                 String uploadedFileLocation = webGlobals.fileUploadPath + filename;
                 File file = new File(uploadedFileLocation);
                 FileUtils.copyFile(tempFile, file);
+                //endregion
 
+                //region Create Thumbnail
                 logger.info("File uploaded to : " + uploadedFileLocation);
 
                 BufferedImage thumbnail = Thumbnails.of(file)
@@ -107,7 +111,9 @@ public class BlueImpController {
                         .asBufferedImage();
                 File thumbnailFile = new File(webGlobals.thumbnailUploadPath + filename);
                 ImageIO.write(thumbnail, "png", thumbnailFile);
+                //endregion
 
+                //region Create PostImage, Add Urls for image display on return
                 PostImage image = new PostImage();
                 image.setPostId(-1L);
                 image.setImageName(filename);
@@ -125,6 +131,7 @@ public class BlueImpController {
                 image.setDeleteType("DELETE");
                 logger.info(image.toString());
                 list.add(image);
+                //endregion
             }
         }
         Map<String, Object> files = new HashMap<>();

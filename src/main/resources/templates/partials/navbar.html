@@ -28,6 +28,14 @@
                 <li{{#pageinfo.activeMenu.downloadsMenu}} class="active" {{/pageinfo.activeMenu.downloadsMenu}}>
                 <a href="/downloads">{{#pageinfo.trans}}navbar.downloads{{/pageinfo.trans}}</a>
                 </li>
+                <li{{#pageinfo.activeMenu.othersMenu}} class="active" {{/pageinfo.activeMenu.othersMenu}}>
+                <a href="#" class="navbar-text pull-right navbar-demos dropdown-toggle"
+                   data-toggle="dropdown">{{#pageinfo.trans}}navbar.others{{/pageinfo.trans}}</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/contact">Email Contact Form</a>
+                    </li>
+                </ul>
+                </li>
             </ul>
             <div class="navbar-right">
                 {{^user}}<a class="navbar-text margin-5" href="/login">Login</a>{{/user}}

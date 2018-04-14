@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> templates/partials/header.html }}
+</head>
+<body>
+<!-- Navigation -->
+{{> templates/partials/navbar.html }}
+
+
+<div id="content">
+    <div class="container">
+        <div class="content">
+            {{> templates/partials/lead.html }}
+            {{#msg}}
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-4">
+                    <div id="alert-message" class="alert alert-{{alertStyle}} fade in">
+                        <a class="close" data-dismiss="alert">&times;</a>
+                        <p>{{msg}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/msg}}
+            <div class="body">
+                <form action="/contact" id="contactForm" method="POST" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label" for="fullName">Your Name</label>
+                            <div class="col-lg-5">
+                                <input name="fullName" class="form-control" id="fullName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label" for="email">Email Address</label>
+                            <div class="col-lg-5">
+                                <input name="email" class="form-control" type="email" id="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label" for="message">Your Message</label>
+                            <div class="col-lg-5">
+                                <textarea name="message" id="message" placeholder="Please enter your message"
+                                          rows="5" class="mail-body"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-4 button-row">
+                                <button type="button" class="btn btn-info" id="cancel" name="cancel" value="Cancel"
+                                        formnovalidate>Cancel
+                                </button>
+                                <input type="submit" class="btn btn-primary" value="Contact"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#contactForm").validate({
+            rules: {
+                fullName: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: "required"
+            },
+            messages: {
+                fullName: "Please enter your full name",
+                email: "Please enter a valid email address",
+                message: "Please enter your message"
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-lg-5").addClass("has-error").removeClass("has-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents(".col-lg-5").addClass("has-success").removeClass("has-error");
+            }
+        });
+    });
+
+    $('#cancel').on('click', function (e) {
+        window.location.href = "/";
+    });
+
+</script>
+
+{{> templates/partials/userinfo.html }}
+
+{{> templates/partials/footer.html }}
+
+</body>
+</html>

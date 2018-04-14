@@ -56,8 +56,8 @@ public class CoreTest extends TestBase {
 
     @Test
     public void messageTests() throws Exception {
-        assertEquals(webContext.messages().get("test.title"), "My Web Test Title");
-        assertEquals(webContext.messages().get("test.title.with.two.params", "One", "Two"), "My Web One and Two Test Title");
+        assertEquals(webContext.messages().get("navbar.home"), "Home");
+        assertEquals(webContext.messages().get("navbar.uploads"), "Uploads");
     }
 
     @Test
